@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css grid 流式布局</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: 50vw;
+            justify-content: center;
+            overflow-x: hidden;
+            margin-bottom: 3em;
+        }
+
+        h2 {
+            justify-self: center;
+            margin: 3em 0;
+            font: 1em monospace;
+        }
+
+        /*.brickwall {*/
+        /*    display: grid;*/
+        /*    grid-gap: 0.25em;*/
+        /*    grid-auto-flow: row dense;*/
+        /*    grid-auto-rows: minmax(133px, 20vmin);*/
+        /*    grid-template-columns: 1fr;*/
+        /*}*/
+        .masonry {
+            display: grid;
+            grid-gap: 0.25em;
+            grid-auto-flow: row dense;
+            grid-auto-rows: 1fr;
+        }
+
+        .masonry > div {
+            width: 100%;
+            background: #222;
+            color: #ddd;
+        }
+
+        [class^='masonry'][data-columns='1'] {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        [class^='masonry'][data-columns='2'] {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        [class^='masonry'][data-columns='3'] {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        [class^='masonry'][data-columns='4'] {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        [class^='masonry'][data-columns='5'] {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        [class^='masonry'] > div[data-row='1'] {
+            grid-row: auto / span 1;
+        }
+        [class^='masonry'] > div[data-row='2'] {
+            grid-row: auto / span 2;
+        }
+        [class^='masonry'] > div[data-row='3'] {
+            grid-row: auto / span 3;
+        }
+        [class^='masonry'] > div[data-row='4'] {
+            grid-row: auto / span 4;
+        }
+
+        /**
+        less 循环 写法
+            .masonry {
+                display: grid;
+                grid-gap: 1em;
+                grid-auto-flow: row dense;
+                grid-auto-rows: auto;
+            }
+
+            .masonry .item {
+                width: 100%;
+                background: #222;
+                color: #ddd;
+            }
+
+            @selectors: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+
+            each(@selectors, {
+                [class='masonry'][data-column="@{key}"] {
+                    grid-template-columns: repeat(@value, 1fr);
+                }
+
+                [class^='masonry'] > div[data-row="@{key}"] {
+                    grid-row: auto / span @value;
+                }
+            });
+         */
+    </style>
+</head>
+
+<body>
+<h2>Responsive Waterfall</h2>
+<div class="masonry" data-columns="1">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+    <div class="item">13</div>
+    <div class="item">14</div>
+    <div class="item">15</div>
+    <div class="item">16</div>
+    <div class="item">17</div>
+</div>
+<h2>Responsive Waterfall2</h2>
+<div class="masonry" data-columns="2">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item width-20">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item" data-row="2">12</div>
+    <div class="item">13</div>
+    <div class="item" data-row="4">14</div>
+    <div class="item">15</div>
+    <div class="item">16</div>
+    <div class="item">17</div>
+</div>
+<h2>Responsive Waterfall3</h2>
+<div class="masonry" data-columns="3">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">
+        <div class="width-20">333</div>
+    </div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item">11</div>
+    <div class="item">12</div>
+    <div class="item">13</div>
+    <div class="item">14</div>
+    <div class="item">15</div>
+    <div class="item">16</div>
+    <div class="item">17</div>
+</div>
+<!--<h2>Responsive Brickwall</h2>-->
+<!--<div class="brickwall">-->
+<!--    <div class="item">1</div>-->
+<!--    <div class="item">2</div>-->
+<!--    <div class="item">3</div>-->
+<!--    <div class="item">4</div>-->
+<!--    <div class="item">5</div>-->
+<!--    <div class="item">6</div>-->
+<!--    <div class="item">7</div>-->
+<!--    <div class="item">8</div>-->
+<!--    <div class="item">9</div>-->
+<!--    <div class="item">10</div>-->
+<!--    <div class="item">11</div>-->
+<!--    <div class="item">12</div>-->
+<!--    <div class="item">13</div>-->
+<!--    <div class="item">14</div>-->
+<!--    <div class="item">15</div>-->
+<!--    <div class="item">16</div>-->
+<!--    <div class="item">17</div>-->
+<!--</div>-->
+</body>
+</html>
